@@ -35,7 +35,7 @@ spec:
               value: unix:/csi/csi.sock
           volumeMounts:
             - name: kubelet-dir
-              mountPath: /var/lib/kubelet
+              mountPath: /opt/rke/var/lib/kubelet
               mountPropagation: "Bidirectional"
             - name: plugin-dir
               mountPath: /csi
@@ -63,7 +63,7 @@ spec:
             - name: ADDRESS
               value: /csi/csi.sock
             - name: DRIVER_REG_SOCK_PATH
-              value: /var/lib/kubelet/plugins/efs.csi.aws.com/csi.sock
+              value: /opt/rke/var/lib/kubelet/plugins/efs.csi.aws.com/csi.sock
             - name: KUBE_NODE_NAME
               valueFrom:
                 fieldRef:
@@ -85,15 +85,15 @@ spec:
       volumes:
         - name: kubelet-dir
           hostPath:
-            path: /var/lib/kubelet
+            path: /opt/rke/var/lib/kubelet
             type: Directory
         - name: registration-dir
           hostPath:
-            path: /var/lib/kubelet/plugins_registry/
+            path: /opt/rke/var/lib/kubelet/plugins_registry/
             type: Directory
         - name: plugin-dir
           hostPath:
-            path: /var/lib/kubelet/plugins/efs.csi.aws.com/
+            path: /opt/rke/var/lib/kubelet/plugins/efs.csi.aws.com/
             type: DirectoryOrCreate
         - name: efs-state-dir
           hostPath:
